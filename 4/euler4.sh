@@ -2,7 +2,6 @@
 biggest=0
 for i in {999..100}
 do
-	#for j in {999..100}
 	for((j=999; j>=$i; j--))
 	do
 		result=$(( i*j ))
