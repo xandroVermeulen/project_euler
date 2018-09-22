@@ -17,11 +17,11 @@ namespace Euler21
 
             for (int i = 1; i < MAXRANGE; i++)
              {
-                amount = calculate_amount_proper_divisors(i);
+                amount = calculate_sum_proper_divisors(i);
                 if(amount < MAXRANGE && cache[amount] == 0 && amount != i)
                 {
                     cache[i] = amount;
-                    cache[amount] = calculate_amount_proper_divisors(amount);
+                    cache[amount] = calculate_sum_proper_divisors(amount);
                     if (cache[amount] == i)
                     {
                         sum += amount + i;
@@ -32,14 +32,18 @@ namespace Euler21
             Console.ReadKey();
         }
 
-        static int calculate_amount_proper_divisors(int check)
+        static int calculate_sum_proper_divisors(int check)
         {
             int amount = 1;
-            for(int divisor = 2; divisor <= check/2; divisor++)
+            for (int divisor = 2; divisor <= Math.Sqrt(check); divisor++)
             {
                 if (((double)check / divisor % 1) == 0)
                 {
-                    amount+= divisor;
+                    amount += divisor;
+                    if (divisor != check / divisor)
+                    {
+                        amount += check / divisor;
+                    }
                 }
             }
             return amount;
